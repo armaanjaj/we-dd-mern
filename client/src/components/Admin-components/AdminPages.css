@@ -1,0 +1,335 @@
+/* Contains css for Admin-News/Admin-Home/Admin-Roles/Admin-DriversEdit pages */
+
+  input[type=color] {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: -2px;
+  }
+
+  input[type=datetime-local] {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: -2px;
+  }
+
+  #account-h3 {
+    color: black;
+  }
+
+  .edit{
+    transition-duration: 0.4s;
+    padding: 5px;
+  }
+  
+  .edit:hover {
+    background-color: #e64c1b; /* blue*/
+    color: white;
+    border-radius: 0.5rem;
+  }
+  .delete{
+    transition-duration: 0.4s;
+    padding: 5px;
+  }
+  
+  .delete:hover {
+    background-color: rgb(243, 73, 73); /* */
+    color: white;
+  }
+
+  .editi{
+    transition-duration: 0.4s;
+    padding: 10px 35px;
+    margin-top: 2ch;
+  }
+  
+  .editi:hover {
+    background-color:#e64c1b; /* blue*/
+    color: white;
+    border-radius: 0.5rem;
+  }
+  
+  #link{
+    margin-top: 5ch;
+  }
+  .deletei{
+    transition-duration: 0.4s;
+    padding: 10px 35px;
+    margin-top: 2ch;
+  }
+  
+  .deletei:hover {
+    background-color: rgb(243, 73, 73); /* */
+    color: white;
+  }
+
+  #Add-button {
+    position: relative;
+    bottom: 5%;
+    left: 5%;
+    z-index: 900;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.2rem;
+    color: rgb(255, 255, 255);
+    background: rgb(235 114 0 / 93%);
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    cursor: pointer;
+  }
+
+  #Add-button:hover{
+    background: rgba(209, 101, 0, 0.93);
+  }
+
+  .fa-square-plus {
+    position: relative;
+    top: 1%;
+    right: 1%;
+  }
+
+  #file-typ{
+    margin-left: 3rem;
+  }
+
+  #add-me{
+    margin-left: 3rem;
+    margin-top: 1rem;
+    color:white;
+    background-color: #002d72;
+    border-radius: 3px;
+    border: none;
+    width: 4rem;
+    height: 2rem;
+  }
+
+  #hit-me{
+    margin-top: 1rem;
+    color:white;
+    background-color: #002d72;
+    border-radius: 3px;
+    border: none;
+    width: 4rem;
+    height: 2rem;
+  }
+
+  .Drivertable{
+    width: 70%;
+    position: relative;
+    left: 5%;
+    /* border: solid; */
+  }
+  .fa-solid{
+    width: 35px;
+  }
+  .Drivertablei{
+    width: 80%;
+    justify-content: center;
+    margin-left: 10ch;
+    margin-top: 5ch;
+    border-radius: 0.5rem;
+    border: solid;
+  }
+
+   /* overlay form */
+   .overlay-visibleEdit, .overlay-visibleDelete{
+    position: fixed;
+    box-shadow: 0px 10px 10px 0px #2b2b2bd1;
+    backdrop-filter: blur(10px);
+    left: 16.2rem;
+    width: 86%;
+    height: 99vh;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    transition: all 0.5s ease;
+    z-index: 999;
+  }
+  .overlay-hiddenEdit, .overlay-hiddenDelete{
+    position: fixed;
+    height: 0;
+    width: 86%;
+    left: 16rem;
+    transition: all 0.5s ease;
+    top: -250px;
+  }
+
+  #add-closeOverlay-btn-role, #edit-closeOverlay-btn-role,  #edit-closeOverlay-btn-driver, #add-closeOverlay-btn-driver, #edit-closeOverlay-btn-admin, #add-closeOverlay-btn-admin {
+    position: relative;
+    left: 86%;
+  }
+
+.overlay-visibleAdd{
+  position: fixed;
+  box-shadow: 0px 10px 10px 0px #2b2b2bd1;
+  backdrop-filter: blur(8px);
+  left: 16.2rem;
+  width: 86%;
+  height: 99vh;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  transition: all 0.5s ease;
+  z-index: 999;
+}
+.overlay-hiddenAdd{
+  position: fixed;
+  left: 16rem;
+  height: 40vh;
+  width: 86%;
+  transition: all 0.5s ease;
+  top: -400px;
+}
+
+.add-role-hidden{
+  position: relative;
+  width: 20.5rem;
+  top: -40vh;
+  left: 35vw;
+  border-radius: 1rem;
+  padding: 1em;
+  transition: all 0.5s ease;
+  z-index: 999;
+}
+
+.add-role{
+  position: relative;
+  width: 20.5rem;
+  top: 30vh;
+  left: 35vw;
+  background-color: white;
+  box-shadow: 0px 10px 10px 2px #2b2b2bd1;
+  border-radius: 1rem;
+  padding: 1em;
+  transition: all 0.5s ease;
+  z-index: 999;
+}
+
+.edit-role-hidden, .delete-driver-hidden, .delete-Admin-hidden{
+  position: relative;
+  width: 20rem;
+  top: -40vh;
+  left: 35vw;
+  border-radius: 1rem;
+  padding: 1em;
+  transition: all 0.5s ease;
+  z-index: 999;
+}
+.edit-role, .delete-driver, .delete-Admin{
+  position: relative;
+  width: 20rem;
+  top: 30vh;
+  left: 35vw;
+  background-color: white;
+  box-shadow: 0px 10px 10px 3px #2b2b2bd1;
+  border-radius: 1rem;
+  padding: 1em;
+  transition: all 0.5s ease;
+  z-index: 999;
+}
+@media screen and (max-width:1600px){
+
+  .edit-role{
+    left: 33vw;
+  }
+  .add-role{
+    left: 33vw;
+  }
+}
+
+@media screen and (max-width:1366px){
+
+  .edit-role{
+    left: 33vw;
+  }
+  .add-role{
+    left: 33vw;
+  }
+}
+@media screen and (max-width:1280px){
+
+  .edit-role{
+    left: 30vw;
+  }
+  .add-role{
+    left: 30vw;
+  }
+}
+@media screen and (max-width:1024px){
+
+  .edit-role{
+    left: 27vw;
+  }
+  .add-role{
+    left: 27vw;
+  }
+}
+@media screen and (max-width:767px){
+
+
+}
+@media screen and (max-width: 414px){
+
+  .overlay-visibleEdit{
+    left: 0%;
+    width: 100%;
+  }
+  .overlay-hiddenEdit{
+    left: -16%;
+    width: 100%;
+  }
+  .overlay-visibleAdd{
+    left: 0%;
+    width: 100%;
+  }
+  .overlay-hiddenAdd{
+    left: -16%;
+    width: 100%;
+  }
+  .edit-role{
+    left: 12vw;
+  }
+  .add-role{
+    left: 12vw;
+  }
+}
+@media screen and (max-device-width: 390px){
+
+  .driver-tab, .admin-tab{
+    width: 100%;
+  }
+
+  .editadmin{
+    height: 15rem;
+  }
+
+  .edit-role{
+    left: 12vw;
+    height: 16rem;
+  }
+  .add-role{
+    left: 12vw;
+  }
+  #edit-role-form{
+    position: relative;
+    bottom: 20%;
+  }
+}
+
+@media screen and (max-width:375px){
+
+  .edit-role{
+    left: 8vw;
+  }
+  .add-role{
+    left: 6.5vw;
+  }
+}
