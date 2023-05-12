@@ -5,11 +5,9 @@ import DehazeIcon from "@mui/icons-material/Dehaze";
 import CloseIcon from "@mui/icons-material/Close";
 import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 
-function NavBar() {
+function NavBar({ isLoginIn }) {
     const [mobileMenu, setMobileMenu] = useState(false);
     const [accountMenu, setAccountMenu] = useState(false);
-
-    const [isLoginIn, setIsLogIn] = useState(false);
 
     return (
         // use w-[95vw] left-[2vw] top-[2vh] rounded-[5px] -> for floating navbar
@@ -49,8 +47,8 @@ function NavBar() {
                             </>
                         ) : (
                             <>
-                                <Link to="/login">Log in</Link>
-                                <Link to="/signup">
+                                <Link to="/auth/login">Log in</Link>
+                                <Link to="/auth/signup">
                                     <Button
                                         background={"#e64c1b"}
                                         color={"#ffffff"}
@@ -63,7 +61,7 @@ function NavBar() {
                     {accountMenu && (
                         <div className="absolute bg-[#002d72] rounded-[5px] text-white flex flex-col justify-center items-center smallMobile:top-[7vh] mobile:top-[8vh] tablet:top-[9vh] laptop:top-[9vh] desktop:top-[9vh] left-0 w-[100%] h-fit shadow-[0_8px_10px_rgba(0,0,0,0.2)]">
                             <Link
-                                to={"/account"}
+                                to={"/accounts"}
                                 className="p-4 text-[1rem] w-[95%] transition-[1s] rounded-[10px] my-1 hover:bg-[#081f41]"
                             >
                                 <div className="flex gap-5">
@@ -92,11 +90,13 @@ function NavBar() {
                     <div className="flex flex-row justify-between items-center gap-5">
                         <div>
                             {!isLoginIn && (
-                                <Button
-                                    background={"#e64c1b"}
-                                    color={"#ffffff"}
-                                    text={"Log in"}
-                                />
+                                <Link to={"/auth/login"}>
+                                    <Button
+                                        background={"#e64c1b"}
+                                        color={"#ffffff"}
+                                        text={"Log in"}
+                                    />
+                                </Link>
                             )}
                         </div>
                         <div
@@ -142,7 +142,7 @@ function NavBar() {
                                         Log out
                                     </Link>
                                     <Link
-                                        to={"/account"}
+                                        to={"/accounts"}
                                         className="p-4 text-[1rem] w-[90%]"
                                     >
                                         <div className="flex gap-5">
@@ -161,7 +161,7 @@ function NavBar() {
                             ) : (
                                 <>
                                     <Link
-                                        to={"/signup"}
+                                        to={"/auth/signup"}
                                         className="p-4 text-[1rem] w-[90%]"
                                     >
                                         Sign up

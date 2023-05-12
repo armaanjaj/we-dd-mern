@@ -20,7 +20,7 @@ export default function About() {
                     <div className="py-[15px] text-[#032d60] font-bold text-4xl">
                         Bringing people together changes everything.
                     </div>
-                    <div>
+                    <div className="text-xl">
                         Lorem ipsum, dolor sit amet consectetur adipisicing
                         elit. Quos reprehenderit officia corporis assumenda
                         cupiditate, voluptate consequatur praesentium nemo unde,
@@ -32,7 +32,7 @@ export default function About() {
                         <div className="py-[15px] text-[#032d60] font-bold text-3xl">
                             Travel
                         </div>
-                        <div className="text-xl">
+                        <div>
                             <p>
                                 Lorem ipsum, dolor sit amet consectetur
                                 adipisicing elit. Quos reprehenderit officia
@@ -66,12 +66,12 @@ export default function About() {
                             </p>
                         </div>
 
-                        <div className="">
+                        <div>
                             <div className="py-[15px] text-[#032d60] font-bold text-3xl">
                                 We believe business is the greatest platform for
                                 change.
                             </div>
-                            <div className="text-xl">
+                            <div>
                                 <div>
                                     Lorem ipsum, dolor sit amet consectetur
                                     adipisicing elit. Quos reprehenderit officia

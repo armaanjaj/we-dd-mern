@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import homeImage from "../../../images/Home.jpg";
 import NavBar from "../../../components/user/customer/NavBar";
 import Footer from '../../../components/user/customer/Footer';
@@ -7,9 +7,12 @@ import Button from "../../../components/layouts/button/Button";
 import Form from "../../../components/layouts/form/Form";
 
 function Home() {
+
+    const [isLoginIn, setIsLogIn] = useState(true);
+
     return (
         <>
-            <NavBar />
+            <NavBar isLoginIn={isLoginIn}/>
             <section id="homepage" className="overflow-x-hidden">
                 <div
                     className="flex flex-col justify-center items-center smallMobile:px-[2rem] mobile:px-[2rem] tablet:px-[3rem] laptop:px-[4rem] desktop:px-[4rem] gap-8 h-[100vh] bg-no-repeat bg-right bg-cover"
