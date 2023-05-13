@@ -7,11 +7,12 @@ export default function About() {
     return (
         <>
             <NavBar />
-            <div className="figure-1-div">
-                <figure>
-                    <img className="w-screen h-full max-h-[70vh] max-w-[100vw] object-cover" src={figure1} />
-                </figure>
-            </div>
+            <figure>
+                <img
+                    className="w-screen h-full max-h-[70vh] max-w-[100vw] object-cover"
+                    src={figure1}
+                />
+            </figure>
             <section className="h-full pt-10 pb-20 smallMobile:px-[1rem] mobile:px-[1.5rem] tablet:px-[2rem] laptop:px-[4rem] desktop:px-[4rem]">
                 <div className="text-[#032d60] font-bold text-6xl uppercase py-10">
                     About Us

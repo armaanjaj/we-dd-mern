@@ -40,7 +40,7 @@ export default function SecurityInformation({
     };
 
     return (
-        <div className="border border-gray-300 px-10 py-8 rounded flex flex-col justify-start items-start gap-8 w-full">
+        <div className="px-10 py-8 rounded flex flex-col justify-start items-start gap-8 w-full">
             <div
                 after=""
                 className="text-4xl font-extrabold w-full after:content-[attr(after)] after:block after:w-full after:h-[1px] after:bg-gray-200 after:rounded after:mt-1"
@@ -89,7 +89,6 @@ export default function SecurityInformation({
                 <DialogTitle>Change Password</DialogTitle>
                 <DialogContent>
                     <TextField
-                        autoFocus
                         margin="dense"
                         label="Current Password"
                         type="password"
@@ -124,10 +123,10 @@ export default function SecurityInformation({
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setDeleteAccountDialogOpen(false)}>
-                        Cancel
+                        <div className="text-[#002D72]">Cancel</div>
                     </Button>
                     <Button onClick={handleAccountDeletionSubmit}>
-                        Delete
+                        <div className="text-red-600">Delete</div>
                     </Button>
                 </DialogActions>
             </Dialog>
