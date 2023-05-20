@@ -36,7 +36,6 @@ const App = () => {
 					<Route path="/auth/login" element={<Login />} />
 					<Route path="/auth/signup" element={<Signup />} />
 					<Route path="/accounts/password/reset" element={<ForgotPassword />} />
-					<Route path="/accounts" element={<Account />} />
 					<Route path="*" element={<PageNotFound />} />
 					
 					{/* Customer */}
@@ -44,12 +43,18 @@ const App = () => {
 					<Route path="/ride" element={<Ride />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/services" element={<Services />} />
+					<Route path="/user/customer/account" element={<Account />} />
 
+
+					{/* Employees */}
+					<Route path="/user/101010101/account" element={<Account />} />
+					
 					{/* Driver */}
-					<Route path="/driver" element={<IndexD />}/>
+					<Route path="/user/driver" element={<IndexD />}/>
 
 					{/* Admin */}
-					<Route path="/admin" element={<IndexA />}/>
+					<Route path="/user/admin" element={<IndexA />}/>
+
 				</Routes>
 			</Router>
 		</>

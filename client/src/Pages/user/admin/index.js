@@ -13,6 +13,8 @@ export default function Index() {
         setcurrentTab(content);
     };
 
+    const userId = 101010101;
+
     return (
         <div className="flex flex-col justify-start items-center gap-0 text-black smallMobile:h-full mobile:h-full tablet:h-screen laptop:h-screen desktop:h-screen">
             <div className="flex smallMobile:flex-col mobile:flex-col tablet:flex-row laptop:flex-row desktop:flex-row justify-between items-center w-full smallMobile:h-1/5 mobile:h-1/5 tablet:h-full laptop:h-full desktop:h-full">
@@ -23,24 +25,28 @@ export default function Index() {
                             tab: "tab1",
                             icon: <ManageAccountsIcon />,
                             type: "",
+                            link: false,
                         },
                         {
                             title: "Settings",
                             tab: "tab2",
                             icon: <SettingsIcon />,
                             type: "",
+                            link: false,
                         },
                         {
                             title: "My account",
                             tab: "tab3",
                             icon: <AccountCircleTwoToneIcon />,
                             type: "",
+                            link: `/user/${userId}/account`,
                         },
                         {
                             title: "Logout",
                             tab: "tab4",
                             icon: <LogoutIcon />,
                             type: "logout",
+                            link: false,
                         },
                     ]}
                     handler={handleNavClick}

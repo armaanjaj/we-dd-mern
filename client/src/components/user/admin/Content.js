@@ -8,5 +8,4 @@ export default function Content({ tab }) {
 
     if (tab === "tab1") return <Index />;
     else if (tab === "tab2") return <Settings />;
-    else if (tab === "tab3") return <Settings />;
 }

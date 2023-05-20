@@ -9,7 +9,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 function Footer() {
     return (
         // Semantic tag
-        <footer className="w-full h-full bg-[#002d72]">
+        <footer className="w-full h-full bg-theme-blue">
             {/* Main/parent body */}
             <div className="text-white flex flex-col justify-center items-start gap-10 relative h-full py-14 smallMobile:px-[1rem] mobile:px-[1.5rem] tablet:px-[2rem] laptop:px-[4rem] desktop:px-[4rem]">
                 <div className="flex flex-col justify-center items-start gap-5">
