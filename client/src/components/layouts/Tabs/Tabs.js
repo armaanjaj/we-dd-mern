@@ -27,7 +27,7 @@ export default function Tabs({ tabs, handler }) {
                             handler(item.tab);
                         }}
                     >
-                        <div>{item.icon}</div>
+                        <div className="smallMobile:w-full mobile:w-full tablet:w-fit smallMobile:flex mobile:flex tablet:block flex-row justify-center items-center">{item.icon}</div>
                         <div className="smallMobile:hidden mobile:hidden tablet:block laptop:block desktop:block">{item.title}</div>
                     </div>
                 )

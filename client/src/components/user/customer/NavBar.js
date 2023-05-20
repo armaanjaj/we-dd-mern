@@ -5,9 +5,10 @@ import DehazeIcon from "@mui/icons-material/Dehaze";
 import CloseIcon from "@mui/icons-material/Close";
 import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 
-function NavBar({ isLoginIn }) {
+function NavBar() {
     const [mobileMenu, setMobileMenu] = useState(false);
     const [accountMenu, setAccountMenu] = useState(false);
+    const [isLoginIn, setIsLogIn] = useState(false);
 
     return (
         // use w-[95vw] left-[2vw] top-[2vh] rounded-[5px] -> for floating navbar

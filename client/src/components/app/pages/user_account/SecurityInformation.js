@@ -12,10 +12,8 @@ export default function SecurityInformation({
     onPasswordChange,
     onAccountDeletion,
 }) {
-    const [changePasswordDialogOpen, setChangePasswordDialogOpen] =
-        useState(false);
-    const [deleteAccountDialogOpen, setDeleteAccountDialogOpen] =
-        useState(false);
+    const [changePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
+    const [deleteAccountDialogOpen, setDeleteAccountDialogOpen] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
 

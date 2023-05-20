@@ -6,13 +6,10 @@ import Card from "../../../components/layouts/cards/LinkCard";
 import Button from "../../../components/layouts/button/Button";
 import Form from "../../../components/layouts/form/Form";
 
-function Home() {
-
-    const [isLoginIn, setIsLogIn] = useState(true);
-
+export default function Index() {
     return (
         <>
-            <NavBar isLoginIn={isLoginIn}/>
+            <NavBar />
             <section id="homepage" className="overflow-x-hidden">
                 <div
                     className="flex flex-col justify-center items-center smallMobile:px-[2rem] mobile:px-[2rem] tablet:px-[3rem] laptop:px-[4rem] desktop:px-[4rem] gap-8 h-[100vh] bg-no-repeat bg-right bg-cover"
@@ -122,5 +119,3 @@ function Home() {
         </>
     );
 }
-
-export default Home;
