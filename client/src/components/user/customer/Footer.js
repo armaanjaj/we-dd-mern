@@ -58,30 +58,6 @@ function Footer() {
                                 </div>
                             </div>
                         </div>
-                        <div className="text-black text-center bg-white rounded-[5px] border-none">
-                            <Form
-                                formHead={"Sign up for our mailing list"}
-                                formData={{
-                                    inputs: [
-                                        {
-                                            key: "mailing_list_signup_email",
-                                            type: "email",
-                                            name: "mailing_list_signup_email",
-                                            placeholder:
-                                                "Enter your email address",
-                                            // handler: (e) => setEmail(e.target.value),
-                                            // error: emailError,
-                                        },
-                                    ],
-                                }}
-                                formButton={"Add me to the mailing list"}
-                                handlers={
-                                    {
-                                        // formHandler: handleLogin,
-                                    }
-                                }
-                            />
-                        </div>
                     </div>
                 </div>
 
