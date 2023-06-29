@@ -1,24 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../../components/layouts/button/Button";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import CloseIcon from "@mui/icons-material/Close";
 import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
+import styled from "styled-components";
+
+const SigninButton = styled.span`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-contents: center;
+    border: 1.5px solid #e64c1b;
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+`;
+
+const SignupButton = styled.span`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-contents: center;
+    background-color: #e64c1b;
+    padding: calc((0.25rem + 1.5px)) calc((1rem + 1.5px));
+    border-radius: 0.25rem;
+    color: white;
+`;
 
 function NavBar() {
     const [mobileMenu, setMobileMenu] = useState(false);
     const [accountMenu, setAccountMenu] = useState(false);
     const [isLoginIn, setIsLogIn] = useState(false);
 
+    const accountMenuRef = useRef(null);
+
+    const handleClickOutside = (event) => {
+        if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)){
+            setAccountMenu(false);
+            setMobileMenu(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside, true);
+        return () => {
+            document.removeEventListener("click", handleClickOutside, true);
+        };
+    });
+
     return (
         // use w-[95vw] left-[2vw] top-[2vh] rounded-[5px] -> for floating navbar
         // use w-full -> for typicall navbar
-        <nav className="w-[95vw] left-[2vw] top-[2vh] rounded-md fixed smallMobile:h-[1rem] mobile:h-[3.5rem] tablet:h-[3rem] laptop:h-[4rem] desktop:h-[4rem] bg-[rgb(255_255_255_/_100%)] z-[999] backdrop-blur-[8px] shadow-[0px_1px_30px_0px_#2b2b2bd1]">
+        <nav className="w-full fixed smallMobile:h-[1rem] mobile:h-[3.5rem] tablet:h-[3rem] laptop:h-[4rem] desktop:h-[4rem] bg-[rgb(255_255_255_/_100%)] z-[999] backdrop-blur-[8px] shadow-[0px_1px_30px_0px_#2b2b2bd1]">
             <div className="text-theme-orange flex flex-row justify-between items-center relative h-full smallMobile:px-[1rem] mobile:px-[1.5rem] tablet:px-[2rem] laptop:px-[4rem] desktop:px-[4rem]">
                 <div>
                     <Link
                         to="/"
-                        className="smallMobile:text-[0.5rem] mobile:text-[1.5rem] tablet:text-[2rem] laptop:text-[2rem] desktop:text-[2rem] w-full cursor-pointer no-underline font-extrabold"
+                        className="smallMobile:text-[0.5rem] mobile:text-[1.25rem] tablet:text-[2rem] laptop:text-[2rem] desktop:text-[2rem] w-full cursor-pointer no-underline font-extrabold"
                     >
                         We-DD
                     </Link>
@@ -28,10 +66,10 @@ function NavBar() {
                     <div className="flex flex-row justify-evenly items-center relative gap-10">
                         <Link to="/">Home</Link>
                         <Link to="/ride">Ride</Link>
-                        <Link to="/about">About</Link>
+                        <Link to="/about">About Us</Link>
                         <Link to="/services">Services</Link>
                     </div>
-                    <div className="border-x-[#bfbec1] border-[1px] h-[4.5vh]"></div>
+                    {/* <div className="border-x-[#bfbec1] border-[1px] h-[4.5vh]"></div>
                     <div className="flex flex-row justify-between items-center gap-5">
                         {isLoginIn ? (
                             <>
@@ -48,19 +86,17 @@ function NavBar() {
                             </>
                         ) : (
                             <>
-                                <Link to="/auth/login">Log in</Link>
+                                <Link to="/auth/signin">
+                                    <SigninButton>Sign In</SigninButton>
+                                </Link>
                                 <Link to="/auth/signup">
-                                    <Button
-                                        background={"#e64c1b"}
-                                        color={"#ffffff"}
-                                        text={"Sign up"}
-                                    />
+                                    <SignupButton>Sign Up</SignupButton>
                                 </Link>
                             </>
                         )}
-                    </div>
+                    </div> */}
                     {accountMenu && (
-                        <div className="absolute bg-theme-blue rounded-[5px] text-white flex flex-col justify-center items-center smallMobile:top-[7vh] mobile:top-[8vh] tablet:top-[9vh] laptop:top-[9vh] desktop:top-[9vh] left-0 w-[100%] h-fit shadow-[0_8px_10px_rgba(0,0,0,0.2)]">
+                        <div ref={accountMenuRef} className="absolute bg-theme-blue rounded-[5px] text-white flex flex-col justify-center items-center smallMobile:top-[5vh] mobile:top-[6vh] tablet:top-[7vh] laptop:top-[7vh] desktop:top-[7vh] largeDesktop:top-[6vh] left-0 w-[100%] h-fit shadow-[0_8px_10px_rgba(0,0,0,0.2)]">
                             <Link
                                 to={"/accounts"}
                                 className="p-4 text-[1rem] w-[95%] transition-[1s] rounded-[10px] my-1 hover:bg-[#081f41]"
@@ -78,7 +114,7 @@ function NavBar() {
                                 </div>
                             </Link>
                             <Link
-                                to={"/logout"}
+                                to={"/auth/logout"}
                                 className="p-4 text-[1rem] w-[95%] transition-[1s] rounded-[10px] my-1 hover:bg-[#081f41]"
                             >
                                 Log out
@@ -91,11 +127,11 @@ function NavBar() {
                     <div className="flex flex-row justify-between items-center gap-5">
                         <div>
                             {!isLoginIn && (
-                                <Link to={"/auth/login"}>
+                                <Link to={"/auth/signup"} className="text-sm">
                                     <Button
                                         background={"#e64c1b"}
                                         color={"#ffffff"}
-                                        text={"Log in"}
+                                        text={"Sign Up"}
                                     />
                                 </Link>
                             )}
@@ -105,11 +141,11 @@ function NavBar() {
                                 setMobileMenu(!mobileMenu);
                             }}
                         >
-                            {mobileMenu ? <CloseIcon /> : <DehazeIcon />}
+                            {mobileMenu ? <CloseIcon className="scale-[90%]" /> : <DehazeIcon className="scale-[90%]" />}
                         </div>
                     </div>
                     {mobileMenu && (
-                        <div className="absolute bg-theme-blue rounded-[5px] text-white flex flex-col justify-center items-center smallMobile:top-[7vh] mobile:top-[8vh] tablet:top-[10.5vh] laptop:top-[10.5vh] desktop:top-[10.5vh] left-0 w-[100%] tablet:h-[98vh] shadow-[0_8px_10px_rgba(0,0,0,0.2)]">
+                        <div ref={accountMenuRef} className="absolute bg-theme-blue rounded-[5px] text-white flex flex-col justify-center items-center smallMobile:top-[7vh] mobile:top-[8vh] tablet:top-[10.5vh] laptop:top-[10.5vh] desktop:top-[10.5vh] left-0 w-[100%] tablet:h-[98vh] shadow-[0_8px_10px_rgba(0,0,0,0.2)]">
                             <Link
                                 to={"/"}
                                 className="p-4 text-[1rem] border-b-[1px] border-white border-solid w-[90%]"
