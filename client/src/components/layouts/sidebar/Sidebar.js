@@ -1,5 +1,5 @@
 import React from "react";
-import Tabs from "../tabs/Tabs";
+import Tabs from "../Tabs/Tabs";
 
 export default function Sidebar({ tabs, handler, logo}) {
     return (

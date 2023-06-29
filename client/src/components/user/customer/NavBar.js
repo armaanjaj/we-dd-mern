@@ -8,7 +8,7 @@ import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 function NavBar() {
     const [mobileMenu, setMobileMenu] = useState(false);
     const [accountMenu, setAccountMenu] = useState(false);
-    const [isLoginIn, setIsLogIn] = useState(false);
+    const [isLoginIn, setIsLogIn] = useState(true);
 
     return (
         // use w-[95vw] left-[2vw] top-[2vh] rounded-[5px] -> for floating navbar
