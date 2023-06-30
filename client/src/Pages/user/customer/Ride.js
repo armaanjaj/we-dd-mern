@@ -3,24 +3,49 @@ import NavBar from "../../../components/user/customer/NavBar";
 import Footer from "../../../components/user/customer/Footer";
 import Button from "../../../components/layouts/button/Button";
 import ContactUsBanner from "../../../components/layouts/banners/ContactUsBanner";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+const RIDE_FORM_URL = "/ride/rideRequest";
 
 export default function Ride() {
 
+    let navigate = useNavigate();
+
     //Monitors state of input
-    const [name, setName] = useState("");
-    const [nameError, setNameError] = useState("");
+    const [fName, setFName] = useState("");
+    const [lName, setLName] = useState("");
     const [email, setEmail] = useState("");
-    const [EmailError, setEmailError] = useState("");
     const [phone, setPhone] = useState("");
-    const [PhoneError, setPhoneError] = useState("");
     const [pick, setPickup] = useState("");
-    const [PickupError, setPickupError] = useState("");
-	const [dest, setDropoff] = useState("");
-    const [DropoffError, setDropoffError] = useState("");
+    const [drop, setDropoff] = useState("");
     const [pay_mode, setPayment] = useState("");
-    const [PaymentError, setPaymentError] = useState("");
     const [car_type, setCarType] = useState("");
-    const [carTypeError, setCarTypeError] = useState("");
+
+    const handleRideSubmit = (e) => {
+        let rideFormBody = JSON.stringify({
+            fName,
+            lName,
+            email,
+            phone,
+            pick,
+            drop
+        });
+
+        axios
+            .post(RIDE_FORM_URL, rideFormBody, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => {
+                if (response.data.success) {
+                    alert(response.data.message);
+                    navigate("/");
+                }
+            })
+            .catch((error) => console.log(error));
+    };
 
     return (
         <>
@@ -33,7 +58,7 @@ export default function Ride() {
 
                     <form
                         className="flex flex-col justify-center items-center gap-10"
-                        onSubmit={(e) => e.preventDefault()}
+                        onSubmit={handleRideSubmit}
                     >
                         <div className="flex flex-col items-start justify-center gap-5 w-full flex-wrap">
                             <div className="flex flex-row items-start justify-start gap-5 flex-wrap">
@@ -42,12 +67,16 @@ export default function Ride() {
                                     className="border-b-[2px] border-solid border-black focus:outline-none"
                                     name="customer_name"
                                     placeholder="First Name"
+                                    value={fName}
+                                    onChange={(e) => setFName(e.target.value)}
                                 />
                                 <input
                                     type="text"
                                     className="border-b-[2px] border-solid border-black focus:outline-none"
                                     name="customer_name"
                                     placeholder="Last Name"
+                                    value={lName}
+                                    onChange={(e) => setLName(e.target.value)}
                                 />
                             </div>
                             <input
@@ -55,24 +84,32 @@ export default function Ride() {
                                 className="border-b-[2px] border-solid border-black w-full focus:outline-none"
                                 name="customer_email"
                                 placeholder="Your Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             <input
                                 type="tel"
                                 className="border-b-[2px] border-solid border-black w-full focus:outline-none"
                                 name="customer_contact_phone"
                                 placeholder="Your Phone"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                             />
                             <input
                                 type="text"
                                 className="border-b-[2px] border-solid border-black w-full focus:outline-none"
                                 name="customer_pickup_location"
                                 placeholder="Your Pickup Address"
+                                value={pick}
+                                onChange={(e) => setPickup(e.target.value)}
                             />
                             <input
                                 type="text"
                                 className="border-b-[2px] border-solid border-black w-full focus:outline-none"
                                 name="customer_dropoff_location"
                                 placeholder="Your Drop-off Address"
+                                value={drop}
+                                onChange={(e) => setDropoff(e.target.value)}
                             />
                             <div className="flex flex-col items-start justify-start gap-5">
                                 <h2 className="text-2xl font-semibold">

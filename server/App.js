@@ -6,7 +6,6 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const session = require("express-session");
 
-
 // SET-UP COOKIE SETTINGS
 const oneDay = 1000 * 60 * 60 * 24;
 let sess = {
@@ -27,17 +26,13 @@ app.use(bodyParser.json());
 // SET-UP HOST SERVER PORT
 const port = process.env.port || 3360;
 
-// COMMON IMPORTS
-
-
-
 // IMPORT ROUTE MODULE -----------------------------------------------
 const servicesRoute = require("./routes/Services");
 const rideRoute = require("./routes/Ride");
 
 // SET-UP ROUTES USING MODULE------------------------------------------
-app.use("/api/services", servicesRoute);
 app.use("/api/ride", rideRoute);
+app.use("/api/services", servicesRoute);
 
 // handling status errors
 app.use((req, res) => {
