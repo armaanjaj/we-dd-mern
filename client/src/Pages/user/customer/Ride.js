@@ -6,7 +6,7 @@ import ContactUsBanner from "../../../components/layouts/banners/ContactUsBanner
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const RIDE_FORM_URL = "/ride/rideRequest";
+const RIDE_FORM_URL = "/api/ride/rideRequest";
 
 export default function Ride() {
 
@@ -39,6 +39,7 @@ export default function Ride() {
                 },
             })
             .then((response) => {
+                alert(response)
                 if (response.data.success) {
                     alert(response.data.message);
                     navigate("/");
