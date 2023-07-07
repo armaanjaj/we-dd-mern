@@ -7,8 +7,7 @@ require("dotenv").config();
 
 router.post("/rideRequest", (req, res) => {
     // destructure incoming data
-    const { fName, lName, email, phone, pick, drop, pay_mode, car_type } =
-        req.body;
+    const { fName, lName, email, phone, pick, drop, pay_mode, car_type } = req.body;
 
     if (
         fName == "" ||
@@ -43,22 +42,31 @@ router.post("/rideRequest", (req, res) => {
     });
 
     // point to the template folder
-    // const handlebarOptions = {
-    //     viewEngine: {
-    //         partialsDir: path.resolve('./views/'),
-    //         defaultLayout: false,
-    //     },
-    //     viewPath: path.resolve('./views/'),
-    // };
+    const handlebarOptions = {
+        viewEngine: {
+            partialsDir: path.resolve("./views/"),
+            defaultLayout: false,
+        },
+        viewPath: path.resolve("./views/"),
+    };
 
     // use a template file with nodemailer
-    // transporter.use('compile', hbs(handlebarOptions))
+    transporter.use("compile", hbs(handlebarOptions));
 
     var mailOptions = {
         from: '"We-DD" <wedd.rides@gmail.com>',
         to: "armaan.jaj@gmail.com",
-        subject: "New Request",
-        text: `${fName},${lName},${email},${phone},${pick},${drop},${pay_mode},${car_type}`,
+        subject: "Ride requested successfully",
+        template: "rideEmail", // the name of the template file i.e email.handlebars
+        context: {
+            name: `${fName} ${lName}`,
+            email: `${email}`,
+            phone: `${phone}`,
+            pay_mode: `${pay_mode}`,
+            pick: `${pick}`,
+            drop: `${drop}`,
+            transmisson: `${car_type}`,
+        },
     };
 
     transporter.sendMail(mailOptions, function (error, info) {

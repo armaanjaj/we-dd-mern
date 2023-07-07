@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import homeImage from "../../../images/Home.jpg";
 import NavBar from "../../../components/user/customer/NavBar";
 import Footer from "../../../components/user/customer/Footer";
@@ -7,6 +7,11 @@ import Button from "../../../components/layouts/button/Button";
 import Form from "../../../components/layouts/form/Form";
 
 export default function Index() {
+
+    useEffect(()=>{
+        document.title = "We-DD | Home"
+    }, []);
+
     return (
         <>
             <NavBar />

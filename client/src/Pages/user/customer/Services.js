@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../../components/user/customer/NavBar";
 import Footer from "../../../components/user/customer/Footer";
 import Button from "../../../components/layouts/button/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button as MuiButton } from "@mui/material";
 
 const SERVICES_FORM_URL = "/api/services/serviceRequest"
 
 function Services() {
 
     let navigate = useNavigate();
+
+    const [openDialog, setOpenDialog] = useState(false);
+    const [dialogTitle, setDialogTitle] = useState("");
+    const [dialogContent, setDialogContent] = useState("");
+
+    useEffect(()=>{
+        document.title = "We-DD | Request a service"
+    }, []);
 
     const [fName, setFName] = useState("");
     const [lName, setLName] = useState("");
@@ -54,11 +63,20 @@ function Services() {
             })
             .then((response) => {
                 if (response.data.success) {
-                    alert(response.data.message);
-                    navigate("/");
+                    setDialogTitle("Success");
+                    setDialogContent(response.data.message);
+                } else {
+                    setDialogTitle("Error");
+                    setDialogContent(response.data.message);
                 }
+                setOpenDialog(true);
             })
             .catch((error) => console.log(error));
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+        navigate("/");
     };
 
     return (
@@ -249,7 +267,7 @@ function Services() {
                                         className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                         htmlFor="questionsComments"
                                     >
-                                        Questions/Comments
+                                        Questions/Comments (OPTIONAL)
                                     </label>
                                     <textarea
                                         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded p-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -276,6 +294,19 @@ function Services() {
             </section>
 
             <Footer />
+
+            {/* Dialog Box */}
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>{dialogTitle}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>{dialogContent}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MuiButton onClick={handleCloseDialog} color="primary" autoFocus>
+                        OK
+                    </MuiButton>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }

@@ -22,10 +22,8 @@ router.post("/serviceRequest", (req, res) => {
 
     let services = "";
     let loopNum = 1;
-    for(element of serviceType){
-        services += (loopNum + `. ${element} `)
-        loopNum++;
-    }
+    for(element of serviceType)
+        services += (loopNum + `. ${element} `); loopNum++;
 
     var transporter = nodemailer.createTransport({
         service: "gmail",

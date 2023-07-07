@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../../components/user/customer/NavBar";
 import Footer from "../../../components/user/customer/Footer";
 import Button from "../../../components/layouts/button/Button";
 import ContactUsBanner from "../../../components/layouts/banners/ContactUsBanner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button as MuiButton } from "@mui/material";
 
 const RIDE_FORM_URL = "/api/ride/rideRequest";
 
@@ -12,7 +13,15 @@ export default function Ride() {
 
     let navigate = useNavigate();
 
-    //Monitors state of input
+    const [openDialog, setOpenDialog] = useState(false);
+    const [dialogTitle, setDialogTitle] = useState("");
+    const [dialogContent, setDialogContent] = useState("");
+
+    useEffect(()=>{
+        document.title = "We-DD | Request your ride"
+    }, []);
+
+    // Monitors state of input
     const [fName, setFName] = useState("");
     const [lName, setLName] = useState("");
     const [email, setEmail] = useState("");
@@ -23,13 +32,17 @@ export default function Ride() {
     const [car_type, setCarType] = useState("");
 
     const handleRideSubmit = (e) => {
+        e.preventDefault();
+
         let rideFormBody = JSON.stringify({
             fName,
             lName,
             email,
             phone,
             pick,
-            drop
+            drop,
+            pay_mode,
+            car_type
         });
 
         axios
@@ -39,13 +52,21 @@ export default function Ride() {
                 },
             })
             .then((response) => {
-                alert(response)
                 if (response.data.success) {
-                    alert(response.data.message);
-                    navigate("/");
+                    setDialogTitle("Success");
+                    setDialogContent(response.data.message);
+                } else {
+                    setDialogTitle("Error");
+                    setDialogContent(response.data.message);
                 }
+                setOpenDialog(true);
             })
             .catch((error) => console.log(error));
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+        navigate("/");
     };
 
     return (
@@ -122,6 +143,8 @@ export default function Ride() {
                                             type="radio"
                                             name="customer_payment_method"
                                             className="hover:cursor-pointer"
+                                            value="Cash"
+                                            onChange={(e) => setPayment(e.target.value)}
                                         />
                                         <label htmlFor="customer_payment_method">
                                             Cash
@@ -132,6 +155,8 @@ export default function Ride() {
                                             type="radio"
                                             name="customer_payment_method"
                                             className="hover:cursor-pointer"
+                                            value="Debit"
+                                            onChange={(e) => setPayment(e.target.value)}
                                         />
                                         <label htmlFor="customer_payment_method">
                                             Debit
@@ -142,6 +167,8 @@ export default function Ride() {
                                             type="radio"
                                             name="customer_payment_method"
                                             className="hover:cursor-pointer"
+                                            value="Credit"
+                                            onChange={(e) => setPayment(e.target.value)}
                                         />
                                         <label htmlFor="customer_payment_method">
                                             Credit
@@ -159,6 +186,8 @@ export default function Ride() {
                                             type="radio"
                                             name="customer_car_type"
                                             className="hover:cursor-pointer"
+                                            value="Automatic"
+                                            onChange={(e) => setCarType(e.target.value)}
                                         />
                                         <label htmlFor="customer_car_type">
                                             Automatic
@@ -169,6 +198,8 @@ export default function Ride() {
                                             type="radio"
                                             name="customer_car_type"
                                             className="hover:cursor-pointer"
+                                            value="Manual"
+                                            onChange={(e) => setCarType(e.target.value)}
                                         />
                                         <label htmlFor="customer_car_type">
                                             Manual
@@ -192,6 +223,19 @@ export default function Ride() {
                 </div>
             </div>
             <Footer />
+
+            {/* Dialog Box */}
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>{dialogTitle}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>{dialogContent}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MuiButton onClick={handleCloseDialog} color="primary" autoFocus>
+                        OK
+                    </MuiButton>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }

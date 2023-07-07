@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Ride requested</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+        body {
+            font-family: 'Raleway', sans-serif;
+            overflow-x: hidden;
+        }
+        .parent-container{
+            background-color: #9fc2f8;
+            padding: 3rem 4rem;
+        }
+        .main-container{
+            background-color: white;
+            border-radius: 1rem;
+        }
+        .title-container{
+            color: #e64c1b;
+            font-weight: bold;
+            font-size: 3rem;
+            padding: 2rem 3rem;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        .child-container{
+            padding: 2rem;
+        }
+        .footer-container{
+            background-color: #002d72;
+            color: white;
+            font-weight: bold;
+            padding: 2rem 3rem;
+            border-top: 1px solid #dbdbdb;
+            border-radius: 0 0 1rem 1rem;
+        }
+        .footer-container a {
+            color: white;
+        }
+        .flex-column{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+        .border-bottom{
+            border-bottom: 1px solid #dbdbdb;
+        }
+        .section-head{
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .style-data{
+            font-size: 1rem;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="parent-container">
+            <div class="main-container">
+                <div class="title-container">
+                    We-DD
+                </div>
+                <div class="child-container">
+                    <h1>Your ride to
+                        {{drop}}
+                        destination was requested successfully.</h1>
+
+                    <h3>Here's a copy of your data.</h3>
+
+                    <div class="flex-column">
+                        <p class="border-bottom section-head">Personal
+                            Information</p>
+                        <div class="flex-column style-data">
+                            <p>Name: {{name}}</p>
+                            <p>Email: {{email}}</p>
+                            <p>Phone number: {{phone}}</p>
+                            <p>Payment method: {{pay_mode}}</p>
+                        </div>
+                    </div>
+                    <div class="flex-column">
+                        <p class="border-bottom section-head">Trip details</p>
+                        <div class="flex-column style-data">
+                            <p>Pickup address: {{pick}}</p>
+                            <p>Destination: {{drop}}</p>
+                        </div>
+                    </div>
+                    <div class="flex-column">
+                        <p class="border-bottom section-head">Vehicle
+                            Details</p>
+                        <div class="flex-column style-data">
+                            <p>Vehicle transmission type:
+                                {{transmisson}}</p>
+                        </div>
+                    </div>
+                    <div class="flex-column">
+                        <h3 class="end-script">One of our team members will
+                            contact you soon.<br />Thanks for choosing
+                            We-DD.</h3>
+                    </div>
+                </div>
+                <div class="footer-container">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Consectetur ipsa dolores facere? At repudiandae quae
+                    molestias numquam quam aliquid ducimus incidunt non,
+                    laudantium magni amet minima excepturi delectus dolor minus.<br
+                    />
+                    <a href="www.we-dd.ca" target="_blank">Visit our website.</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

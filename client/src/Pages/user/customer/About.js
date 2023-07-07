@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import figure1 from "../../../images/About us page header.jpg";
 import NavBar from "../../../components/user/customer/NavBar";
 import Footer from "../../../components/user/customer/Footer";
 
 export default function About() {
+
+    useEffect(()=>{
+        document.title = "We-DD | About Us"
+    }, []);
+
     return (
         <>
             <NavBar />
