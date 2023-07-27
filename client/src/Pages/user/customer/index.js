@@ -74,17 +74,17 @@ export default function Index() {
                         <div className="flex flex-row justify-center items-center flex-wrap gap-5">
                             <Card
                                 head="Details"
-                                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium magni officiis..."
+                                description="At WEDD, we are passionate about revolutionizing transportation and providing our clients with the best designated driver and taxi services."
                                 link="/about"
                             />
                             <Card
                                 head="Services"
-                                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium magni officiis..."
+                                description="WEDD specializes in tailoring transportation solutions to suit your specific requirements."
                                 link="/services"
                             />
                             <Card
                                 head="Ride with us"
-                                description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium magni officiis..."
+                                description="We believe that exceptional transportation services. Our focus on people over profit allows us to keep our prices competitive without compromising on quality. "
                                 link="/ride"
                             />
                         </div>
