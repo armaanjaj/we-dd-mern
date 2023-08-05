@@ -44,6 +44,11 @@ function Services() {
     const handleServiceSubmit = (e) => {
         e.preventDefault();
 
+        if(serviceType.length === 0) {
+            window.alert("Please select the type of service you want.")
+            return;
+        }
+
         let servicesFormBody = JSON.stringify({
             fName,
             lName,
@@ -112,6 +117,7 @@ function Services() {
                                     type="text"
                                     value={fName}
                                     onChange={(e) => setFName(e.target.value)}
+                                    required
                                 />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
@@ -127,6 +133,7 @@ function Services() {
                                     type="text"
                                     value={lName}
                                     onChange={(e) => setLName(e.target.value)}
+                                    required
                                 />
                             </div>
                         </div>
@@ -144,6 +151,7 @@ function Services() {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    required
                                 />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
@@ -159,6 +167,7 @@ function Services() {
                                     type="tel"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
+                                    required
                                 />
                             </div>
                             <div className="flex flex-wrap mb-6">
@@ -175,6 +184,7 @@ function Services() {
                                         type="text"
                                         value={street}
                                         onChange={(e) => setStreet(e.target.value)}
+                                        required
                                     />
                                 </div>
                                 <div className="w-full md:w-1/2 px-3">
@@ -190,6 +200,7 @@ function Services() {
                                         type="text"
                                         value={city}
                                         onChange={(e) => setCity(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </div>
@@ -207,6 +218,7 @@ function Services() {
                                         type="text"
                                         value={province}
                                         onChange={(e) => setProvince(e.target.value)}
+                                        required
                                     />
                                 </div>
                                 <div className="w-full md:w-1/2 px-3">
@@ -222,6 +234,7 @@ function Services() {
                                         type="text"
                                         value={postalCode}
                                         onChange={(e) => setPostalCode(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </div>

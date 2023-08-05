@@ -9,11 +9,21 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
+    DialogContentText,
     DialogTitle,
     TextField,
 } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+
+const CONTACT_FORM_URL = "/api/contact/";
 
 export default function Index() {
+
+    let navigate = useNavigate();
+    let cookie = new Cookies();
+
     useEffect(() => {
         document.title = "We-DD | Home";
     }, []);
@@ -22,13 +32,73 @@ export default function Index() {
     const [yourName, setYourName] = useState("");
     const [yourEmail, setYourEmail] = useState("");
     const [yourMessage, setYourMessage] = useState("");
+    const [openDialog, setOpenDialog] = useState(false);
+    const [dialogTitle, setDialogTitle] = useState("");
+    const [dialogContent, setDialogContent] = useState("");
+
+    const [pickAddress, setPickAddress] = useState("")
+    const [dropAddress, setDropAddress] = useState("")
+
+    const handleQuickForm = (e) => {
+        e.preventDefault();
+
+        if(pickAddress !== "" && dropAddress !== ""){
+            // Calculate the expiration time for the cookie (5 minutes in milliseconds)
+            cookie.set("pickAddress", pickAddress, { expires: new Date((new Date().getTime()) + ( 5 * 60 * 1000))});
+            cookie.set("dropAddress", dropAddress, { expires: new Date((new Date().getTime()) + ( 5 * 60 * 1000))});
+            
+            navigate("/ride?redirect=quickform");
+        }
+    }
 
     const handleSend = (e) => {
         e.preventDefault();
+
+        if(yourName === "" || yourEmail === "" || yourMessage === ""){
+            window.alert("All fields are mandatory. Please fill out all of them.")
+            return;
+        }
+    
+        let contactFormBody = JSON.stringify({
+            yourName,
+            yourEmail,
+            yourMessage,
+        });
+    
+        axios
+            .post(CONTACT_FORM_URL, contactFormBody, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => {
+                if (response.data.success) {
+                    setDialogTitle("Success");
+                    setDialogContent(response.data.message);
+                } else {
+                    setDialogTitle("Error");
+                    setDialogContent(response.data.message);
+                }
+            })
+            .catch((error) => console.log(error))
+            .finally(() => {
+                setContactDialogOpen(false);
+                setOpenDialog(true);
+                setYourName("")
+                setYourEmail("")
+                setYourMessage("")
+            });
+    };
+    
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+        navigate("/");
     };
 
     return (
         <>
+
             <NavBar />
             <section
                 id="homepage"
@@ -54,23 +124,21 @@ export default function Index() {
                                         type: "text",
                                         name: "pickup_location",
                                         placeholder: "Enter pick up location",
-                                        // handler: (e) => setEmail(e.target.value),
-                                        // error: emailError,
+                                        handler: (e) => setPickAddress(e.target.value),
                                     },
                                     {
                                         key: "dropoff_location",
                                         type: "text",
                                         name: "dropoff_location",
                                         placeholder: "Enter drop off location",
-                                        // handler: (e) => setPassword(e.target.value),
-                                        // error: passwordError,
+                                        handler: (e) => setDropAddress(e.target.value),
                                     },
                                 ],
                             }}
-                            formButton={"Request"}
+                            formButton={"Proceed"}
                             handlers={
                                 {
-                                    // formHandler: handleLogin,
+                                    formHandler: handleQuickForm,
                                 }
                             }
                         />
@@ -204,6 +272,19 @@ export default function Index() {
             </section>
 
             <Footer />
+
+            {/* Dialog Box */}
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>{dialogTitle}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>{dialogContent}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MuiButton onClick={handleCloseDialog} color="primary" autoFocus>
+                        OK
+                    </MuiButton>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }

@@ -4,23 +4,30 @@ import Footer from "../../../components/user/customer/Footer";
 import Button from "../../../components/layouts/button/Button";
 import ContactUsBanner from "../../../components/layouts/banners/ContactUsBanner";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button as MuiButton } from "@mui/material";
 import Loader from "../../../components/app/Loaders/Loader-FS";
+import Cookies from "universal-cookie";
 
 const RIDE_FORM_URL = "/api/ride/rideRequest";
 
 export default function Ride() {
 
     let navigate = useNavigate();
+    let cookie = new Cookies();
 
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogTitle, setDialogTitle] = useState("");
     const [dialogContent, setDialogContent] = useState("");
     const [showLoader, setShowLoader] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(()=>{
         document.title = "We-DD | Request your ride"
+
+        if(searchParams.get("redirect")==="quickform"){
+            window.alert("Please fill out other necessary fields too.")
+        }
     }, []);
 
     // Monitors state of input
@@ -28,13 +35,18 @@ export default function Ride() {
     const [lName, setLName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
-    const [pick, setPickup] = useState("");
-    const [drop, setDropoff] = useState("");
+    const [pick, setPickup] = useState(cookie.get("pickAddress") !== undefined ? cookie.get("pickAddress") : "");
+    const [drop, setDropoff] = useState(cookie.get("dropAddress") !== undefined ? cookie.get("dropAddress") : "");
     const [pay_mode, setPayment] = useState("");
     const [car_type, setCarType] = useState("");
 
     const handleRideSubmit = (e) => {
         e.preventDefault();
+
+        if(setPayment === "" || car_type === "") {
+            window.alert("All fields are required.")
+            return;
+        }
         
         let rideFormBody = JSON.stringify({
             fName,
@@ -100,6 +112,7 @@ export default function Ride() {
                                     placeholder="First Name"
                                     value={fName}
                                     onChange={(e) => setFName(e.target.value)}
+                                    required
                                 />
                                 <input
                                     type="text"
@@ -108,6 +121,7 @@ export default function Ride() {
                                     placeholder="Last Name"
                                     value={lName}
                                     onChange={(e) => setLName(e.target.value)}
+                                    required
                                 />
                             </div>
                             <input
@@ -117,6 +131,7 @@ export default function Ride() {
                                 placeholder="Your Email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                             <input
                                 type="tel"
@@ -125,6 +140,7 @@ export default function Ride() {
                                 placeholder="Your Phone"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
+                                required
                             />
                             <input
                                 type="text"
@@ -133,6 +149,7 @@ export default function Ride() {
                                 placeholder="Your Pickup Address"
                                 value={pick}
                                 onChange={(e) => setPickup(e.target.value)}
+                                required
                             />
                             <input
                                 type="text"
@@ -141,6 +158,7 @@ export default function Ride() {
                                 placeholder="Your Drop-off Address"
                                 value={drop}
                                 onChange={(e) => setDropoff(e.target.value)}
+                                required
                             />
                             <div className="flex flex-col items-start justify-start gap-5">
                                 <h2 className="text-2xl font-semibold">

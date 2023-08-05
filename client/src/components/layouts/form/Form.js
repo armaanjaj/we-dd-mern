@@ -24,6 +24,7 @@ function Form({ formHead, formFoot = null, formData, formButton, handlers }) {
                                 name={input.name}
                                 placeholder={input.placeholder}
                                 onChange={input.handler}
+                                required
                             />
                             {input.error && (
                                 <div className="warning font-extrabold text-[11px] text-red-500">

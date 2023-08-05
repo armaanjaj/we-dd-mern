@@ -29,14 +29,16 @@ const port = process.env.port || 3360;
 // IMPORT ROUTE MODULE -----------------------------------------------
 const servicesRoute = require("./routes/Services");
 const rideRoute = require("./routes/Ride");
+const contactRoute = require("./routes/Contact");
 
 // SET-UP ROUTES USING MODULE------------------------------------------
 app.use("/api/ride", rideRoute);
 app.use("/api/services", servicesRoute);
+app.use("/api/contact", contactRoute);
 
 // handling status errors
 app.use((req, res) => {
-	res.status(404).send("Page not found.");
+	res.status(404).send("Route not found.");
 });
 
 // app port listener
