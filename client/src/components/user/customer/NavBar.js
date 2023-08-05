@@ -1,42 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../../../components/layouts/button/Button";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import CloseIcon from "@mui/icons-material/Close";
-import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
-import styled from "styled-components";
-
-const SigninButton = styled.span`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-contents: center;
-    border: 1.5px solid #e64c1b;
-    padding: 0.25rem 1rem;
-    border-radius: 0.25rem;
-`;
-
-const SignupButton = styled.span`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-contents: center;
-    background-color: #e64c1b;
-    padding: calc((0.25rem + 1.5px)) calc((1rem + 1.5px));
-    border-radius: 0.25rem;
-    color: white;
-`;
 
 function NavBar() {
     const [mobileMenu, setMobileMenu] = useState(false);
-    const [accountMenu, setAccountMenu] = useState(false);
-    const [isLoginIn, setIsLogIn] = useState(true);
 
-    const accountMenuRef = useRef(null);
+    const mobileMenuRef = useRef(null);
 
     const handleClickOutside = (event) => {
-        if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)){
-            setAccountMenu(false);
+        if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)){
             setMobileMenu(false);
         }
     };
@@ -69,73 +42,10 @@ function NavBar() {
                         <Link to="/about">About Us</Link>
                         <Link to="/services">Services</Link>
                     </div>
-                    {/* <div className="border-x-[#bfbec1] border-[1px] h-[4.5vh]"></div>
-                    <div className="flex flex-row justify-between items-center gap-5">
-                        {isLoginIn ? (
-                            <>
-                                <button
-                                    onClick={() => setAccountMenu(!accountMenu)}
-                                    className="hover:cursor-pointer"
-                                >
-                                    {accountMenu ? (
-                                        <CloseIcon className="scale-[120%]" />
-                                    ) : (
-                                        <AccountCircleTwoToneIcon className="scale-[120%]" />
-                                    )}
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <Link to="/auth/signin">
-                                    <SigninButton>Sign In</SigninButton>
-                                </Link>
-                                <Link to="/auth/signup">
-                                    <SignupButton>Sign Up</SignupButton>
-                                </Link>
-                            </>
-                        )}
-                    </div> */}
-                    {accountMenu && (
-                        <div ref={accountMenuRef} className="absolute bg-theme-blue rounded-[5px] text-white flex flex-col justify-center items-center smallMobile:top-[5vh] mobile:top-[6vh] tablet:top-[7vh] laptop:top-[7vh] desktop:top-[7vh] largeDesktop:top-[6vh] left-0 w-[100%] h-fit shadow-[0_8px_10px_rgba(0,0,0,0.2)]">
-                            <Link
-                                to={"/accounts"}
-                                className="p-4 text-[1rem] w-[95%] transition-[1s] rounded-[10px] my-1 hover:bg-[#081f41]"
-                            >
-                                <div className="flex gap-5">
-                                    <div className="flex flex-col justify-start items-center">
-                                        <AccountCircleTwoToneIcon />
-                                    </div>
-                                    <div className="flex flex-col justify-start items-start gap-1">
-                                        <span>My Account</span>
-                                        <span className="text-[0.75rem]">
-                                            armaan.jaj@gmail.com
-                                        </span>
-                                    </div>
-                                </div>
-                            </Link>
-                            <Link
-                                to={"/auth/logout"}
-                                className="p-4 text-[1rem] w-[95%] transition-[1s] rounded-[10px] my-1 hover:bg-[#081f41]"
-                            >
-                                Log out
-                            </Link>
-                        </div>
-                    )}
                 </div>
                 {/* Hamburger Menu code */}
                 <div className="mobile-navbar-links flex-col justify-start items-start no-underline cursor-pointer smallMobile:flex mobile:flex tablet:flex laptop:hidden desktop:hidden">
                     <div className="flex flex-row justify-between items-center gap-5">
-                        <div>
-                            {!isLoginIn && (
-                                <Link to={"/auth/signup"} className="text-sm">
-                                    <Button
-                                        background={"#e64c1b"}
-                                        color={"#ffffff"}
-                                        text={"Sign Up"}
-                                    />
-                                </Link>
-                            )}
-                        </div>
                         <div
                             onClick={() => {
                                 setMobileMenu(!mobileMenu);
@@ -145,7 +55,7 @@ function NavBar() {
                         </div>
                     </div>
                     {mobileMenu && (
-                        <div ref={accountMenuRef} className="absolute bg-theme-blue rounded-[5px] text-white flex flex-col justify-center items-center smallMobile:top-[7vh] mobile:top-[8vh] tablet:top-[10.5vh] laptop:top-[10.5vh] desktop:top-[10.5vh] left-0 w-[100%] tablet:h-[98vh] shadow-[0_8px_10px_rgba(0,0,0,0.2)]">
+                        <div ref={mobileMenuRef} className="absolute bg-theme-blue rounded-[5px] text-white flex flex-col justify-center items-center smallMobile:top-[7vh] mobile:top-[8vh] tablet:top-[5vh] laptop:top-[10.5vh] desktop:top-[10.5vh] left-0 w-[100%] tablet:h-[40vh] shadow-[0_8px_10px_rgba(0,0,0,0.2)]">
                             <Link
                                 to={"/"}
                                 className="p-4 text-[1rem] border-b-[1px] border-white border-solid w-[90%]"
@@ -170,41 +80,6 @@ function NavBar() {
                             >
                                 Services
                             </Link>
-                            {isLoginIn ? (
-                                <>
-                                    <Link
-                                        to={"/logout"}
-                                        className="p-4 text-[1rem] w-[90%]"
-                                    >
-                                        Log out
-                                    </Link>
-                                    <Link
-                                        to={"/accounts"}
-                                        className="p-4 text-[1rem] w-[90%]"
-                                    >
-                                        <div className="flex gap-5">
-                                            <div className="flex flex-col justify-start items-center">
-                                                <AccountCircleTwoToneIcon />
-                                            </div>
-                                            <div className="flex flex-col justify-start items-start gap-1">
-                                                <span>My Account</span>
-                                                <span className="text-[0.75rem]">
-                                                    armaan.jaj@gmail.com
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </>
-                            ) : (
-                                <>
-                                    <Link
-                                        to={"/auth/signup"}
-                                        className="p-4 text-[1rem] w-[90%]"
-                                    >
-                                        Sign up
-                                    </Link>
-                                </>
-                            )}
                         </div>
                     )}
                 </div>

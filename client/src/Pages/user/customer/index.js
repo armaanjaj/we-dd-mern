@@ -3,13 +3,29 @@ import homeImage from "../../../images/Home.jpg";
 import NavBar from "../../../components/user/customer/NavBar";
 import Footer from "../../../components/user/customer/Footer";
 import Card from "../../../components/layouts/cards/LinkCard";
-import Button from "../../../components/layouts/button/Button";
 import Form from "../../../components/layouts/form/Form";
+import {
+    Button as MuiButton,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    TextField,
+} from "@mui/material";
 
 export default function Index() {
     useEffect(() => {
         document.title = "We-DD | Home";
     }, []);
+
+    const [contactDialogOpen, setContactDialogOpen] = useState(false);
+    const [yourName, setYourName] = useState("");
+    const [yourEmail, setYourEmail] = useState("");
+    const [yourMessage, setYourMessage] = useState("");
+
+    const handleSend = (e) => {
+        e.preventDefault();
+    };
 
     return (
         <>
@@ -27,7 +43,7 @@ export default function Index() {
                             We are <br /> Designated Drivers
                         </h1>
                     </div>
-                    <div className="w-[50vw] flex flex-row justify-center items-center">
+                    <div className="smallMobile:w-full mobile:w-full tablet:w-full laptop:w-full desktop:w-[50vw] largeDesktop:w-[50vw] flex flex-row justify-center items-center">
                         {/* Form */}
                         <Form
                             formHead={"Request your ride"}
@@ -71,27 +87,27 @@ export default function Index() {
                         <div className="h-[2px] w-[30%] inline-block bg-black"></div>
                     </div>
                     <p className="text-gray-700 mb-8 text-center">
-                        Our designated drivers are available 24/7 to drive you
-                        to your destination safely and comfortably. Just follow
-                        these simple steps to get started:
+                        Our designated drivers drive you to your destination
+                        safely and comfortably. Just follow these simple steps
+                        to get started:
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="bg-white p-4 text-center border-[2px] border-solid rounded-[5px]">
                             <div className="text-4xl text-blue-600 mb-2">1</div>
                             <p className="font-semibold">
-                                Enter your pick-up and drop-off addresses.
+                                Enter your pick-up, drop-off addresses and other required details.
                             </p>
                         </div>
                         <div className="bg-white p-4 text-center border-[2px] border-solid rounded-[5px]">
                             <div className="text-4xl text-blue-600 mb-2">2</div>
                             <p className="font-semibold">
-                                Review the estimated fare and choose your ride.
+                                Get a call back from us and confirm the ride.
                             </p>
                         </div>
                         <div className="bg-white p-4 text-center border-[2px] border-solid rounded-[5px]">
                             <div className="text-4xl text-blue-600 mb-2">3</div>
                             <p className="font-semibold">
-                                Confirm your request and enjoy the ride!
+                                Hope in and enjoy the ride!
                             </p>
                         </div>
                     </div>
@@ -109,12 +125,12 @@ export default function Index() {
                         <div className="flex flex-row justify-center items-center flex-wrap gap-5">
                             <Card
                                 head="Details"
-                                description="At WEDD, we are passionate about revolutionizing transportation and providing our clients with the best designated driver and taxi services."
+                                description="At We-DD, we are passionate about revolutionizing transportation and providing our clients with the best designated driver and taxi services."
                                 link="/about"
                             />
                             <Card
                                 head="Services"
-                                description="WEDD specializes in tailoring transportation solutions to suit your specific requirements."
+                                description="We-DD specializes in tailoring transportation solutions to suit your specific requirements."
                                 link="/services"
                             />
                             <Card
@@ -133,22 +149,60 @@ export default function Index() {
                     </h2>
                     <p className="text-gray-700 mb-8 text-center">
                         Have questions or need assistance? Contact our customer
-                        support team 24/7.
+                        support team.
                     </p>
                     <div className="flex items-center justify-center">
-                        <button
-                            className="bg-theme-blue text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
-                            onClick={() =>
-                                window.alert(
-                                    "Contact information or form can be added here."
-                                )
-                            }
+                        <div
+                            className="bg-theme-blue text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 hover:cursor-pointer"
+                            onClick={() => setContactDialogOpen(true)}
                         >
                             Get in touch
-                        </button>
+                        </div>
                     </div>
+                    <Dialog
+                        open={contactDialogOpen}
+                        onClose={() => setContactDialogOpen(false)}
+                    >
+                        <DialogTitle>Send us your questions</DialogTitle>
+                        <DialogContent>
+                            <TextField
+                                margin="dense"
+                                label="Name"
+                                type="text"
+                                value={yourName}
+                                onChange={(e) => setYourName(e.target.value)}
+                                fullWidth
+                                required
+                            />
+                            <TextField
+                                margin="dense"
+                                label="Email"
+                                type="email"
+                                value={yourEmail}
+                                onChange={(e) => setYourEmail(e.target.value)}
+                                fullWidth
+                                required
+                            />
+                            
+                            <TextField
+                                margin="dense"
+                                label="Message"
+                                type="text"
+                                value={yourMessage}
+                                onChange={(e) => setYourMessage(e.target.value)}
+                                fullWidth
+                                required
+                            />
+                            
+                            <DialogActions>
+                                <MuiButton onClick={() => setContactDialogOpen(false)}> Cancel </MuiButton>
+                                <MuiButton onClick={handleSend}>Send</MuiButton>
+                            </DialogActions>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </section>
+
             <Footer />
         </>
     );

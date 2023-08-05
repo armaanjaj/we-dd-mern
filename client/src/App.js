@@ -1,9 +1,10 @@
 import * as React from "react";
-import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import "./App.css";
 
 // Application
 import PageNotFound from "./Pages/app/Page_not_found";
+// import TermsAndPrivacy from "./Pages/app/privacy-and-terms";
 
 // Customer
 import IndexC from "./Pages/user/customer/index";
@@ -22,6 +23,7 @@ const App = () => {
 				<Routes>
 					{/* Application */}
 					<Route path="*" element={<PageNotFound />} />
+					{/* <Route path="/privacy-and-terms" element={<TermsAndPrivacy />} /> */}
 					
 					{/* Customer */}
 					<Route path="/" element={<IndexC />} />

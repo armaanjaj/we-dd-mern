@@ -218,7 +218,7 @@ export default function Ride() {
                         />
                     </form>
                 </div>
-                <div className="h-full w-1/2 smallMobile:hidden mobile:hidden tablet:block laptop:block desktop:block">
+                <div className="h-full w-1/2 smallMobile:hidden mobile:hidden tablet:hidden laptop:block desktop:block">
                     <ContactUsBanner />
                 </div>
             </div>
