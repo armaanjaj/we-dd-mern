@@ -46,15 +46,9 @@ router.post("/serviceRequest", (req, res) => {
     // use a template file with nodemailer
     transporter.use("compile", hbs(handlebarOptions));
 
-    var mailOptions = {
+    var mailOptionsClient = {
         from: '"We-DD" <wedd.rides@gmail.com>',
         to: `${email}`,
-        bcc: [
-            {
-                name:'We-DD',
-                address:process.env.MAIN
-            }
-        ],
         subject: "Request received successfully",
         template: "servicesEmail", // the name of the template file i.e email.handlebars
         context: {
@@ -68,16 +62,41 @@ router.post("/serviceRequest", (req, res) => {
         },
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    var mailOptionsOffice = {
+        from: '"We-DD" <wedd.rides@gmail.com>',
+        to: `${process.env.MAIN}`,
+        subject: "New service request",
+        template: "officeServicesEmail", // the name of the template file i.e email.handlebars
+        context: {
+            name: `${fName} ${lName}`,
+            services: services,
+            email: `${email}`,
+            phone: `${phone}`,
+            address: `${street}, ${city}, ${province}`,
+            postalCode: `${postalCode}`,
+            questionsComments: `${questionsComments}`,
+        },
+    };
+
+    transporter.sendMail(mailOptionsOffice, function (error, info) {
         if (error) {
             return res.status(500).send({
                 success: false,
                 message: "Internal server error. Please try again later.",
             });
         } else {
-            return res.status(200).send({
-                success: true,
-                message: "Request sent",
+            transporter.sendMail(mailOptionsClient, function (error, info) {
+                if (error) {
+                    return res.status(500).send({
+                        success: false,
+                        message: "Internal server error. Please try again later.",
+                    });
+                } else {
+                    return res.status(200).send({
+                        success: true,
+                        message: "Request sent",
+                    });
+                }
             });
         }
     });

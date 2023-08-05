@@ -6,6 +6,7 @@ import ContactUsBanner from "../../../components/layouts/banners/ContactUsBanner
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button as MuiButton } from "@mui/material";
+import Loader from "../../../components/app/Loaders/Loader-FS";
 
 const RIDE_FORM_URL = "/api/ride/rideRequest";
 
@@ -16,6 +17,7 @@ export default function Ride() {
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogTitle, setDialogTitle] = useState("");
     const [dialogContent, setDialogContent] = useState("");
+    const [showLoader, setShowLoader] = useState(false);
 
     useEffect(()=>{
         document.title = "We-DD | Request your ride"
@@ -33,7 +35,7 @@ export default function Ride() {
 
     const handleRideSubmit = (e) => {
         e.preventDefault();
-
+        
         let rideFormBody = JSON.stringify({
             fName,
             lName,
@@ -44,6 +46,8 @@ export default function Ride() {
             pay_mode,
             car_type
         });
+        
+        setShowLoader(true)
 
         axios
             .post(RIDE_FORM_URL, rideFormBody, {
@@ -61,7 +65,8 @@ export default function Ride() {
                 }
                 setOpenDialog(true);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log(error))
+            .finally(() => setShowLoader(false));
     };
 
     const handleCloseDialog = () => {
@@ -71,6 +76,10 @@ export default function Ride() {
 
     return (
         <>
+
+            {/* Loader */}
+            {showLoader === true && <Loader/>}
+
             <NavBar />
             <div className="flex flex-row items-center justify-center w-full h-screen">
                 <div className="flex flex-col items-start justify-start gap-5 smallMobile:overflow-y-hidden mobile:overflow-y-hidden tablet:overflow-y-scroll laptop:overflow-y-scroll desktop:overflow-y-scroll smallMobile:w-full mobile:w-full tablet:w-1/2 laptop:w-1/2 desktop:w-1/2 h-full pt-32 pb-20 smallMobile:px-[1rem] mobile:px-[1.5rem] tablet:px-[2rem] laptop:px-[4rem] desktop:px-[4rem]">

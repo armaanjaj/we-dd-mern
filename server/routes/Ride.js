@@ -7,7 +7,8 @@ require("dotenv").config();
 
 router.post("/rideRequest", (req, res) => {
     // destructure incoming data
-    const { fName, lName, email, phone, pick, drop, pay_mode, car_type } = req.body;
+    const { fName, lName, email, phone, pick, drop, pay_mode, car_type } =
+        req.body;
 
     if (
         fName == "" ||
@@ -53,15 +54,9 @@ router.post("/rideRequest", (req, res) => {
     // use a template file with nodemailer
     transporter.use("compile", hbs(handlebarOptions));
 
-    var mailOptions = {
+    var mailOptionsClient = {
         from: '"We-DD" <wedd.rides@gmail.com>',
         to: `${email}`,
-        bcc: [
-            {
-                name: 'We-DD',
-                address: process.env.MAIN
-            }
-        ],
         subject: "Ride requested successfully",
         template: "rideEmail", // the name of the template file i.e email.handlebars
         context: {
@@ -75,16 +70,42 @@ router.post("/rideRequest", (req, res) => {
         },
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    var mailOptionsOffice = {
+        from: '"We-DD" <wedd.rides@gmail.com>',
+        to: `${process.env.MAIN}`,
+        subject: "New ride request",
+        template: "officeRideEmail", // the name of the template file i.e email.handlebars
+        context: {
+            name: `${fName} ${lName}`,
+            email: `${email}`,
+            phone: `${phone}`,
+            pay_mode: `${pay_mode}`,
+            pick: `${pick}`,
+            drop: `${drop}`,
+            transmisson: `${car_type}`,
+        },
+    };
+
+    transporter.sendMail(mailOptionsOffice, function (error, info) {
         if (error) {
             return res.status(500).send({
                 success: false,
                 message: "Internal server error. Please try again later.",
             });
         } else {
-            return res.status(200).send({
-                success: true,
-                message: "Request sent",
+            transporter.sendMail(mailOptionsClient, function (error, info) {
+                if (error) {
+                    return res.status(500).send({
+                        success: false,
+                        message:
+                            "Internal server error. Please try again later.",
+                    });
+                } else {
+                    return res.status(200).send({
+                        success: true,
+                        message: "Request sent",
+                    });
+                }
             });
         }
     });

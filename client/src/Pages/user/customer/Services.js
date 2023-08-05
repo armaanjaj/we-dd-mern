@@ -5,6 +5,7 @@ import Button from "../../../components/layouts/button/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button as MuiButton } from "@mui/material";
+import Loader from "../../../components/app/Loaders/Loader-FS";
 
 const SERVICES_FORM_URL = "/api/services/serviceRequest"
 
@@ -15,6 +16,7 @@ function Services() {
     const [openDialog, setOpenDialog] = useState(false);
     const [dialogTitle, setDialogTitle] = useState("");
     const [dialogContent, setDialogContent] = useState("");
+    const [showLoader, setShowLoader] = useState(false);
 
     useEffect(()=>{
         document.title = "We-DD | Request a service"
@@ -55,6 +57,8 @@ function Services() {
             questionsComments
         });
 
+        setShowLoader(true);
+
         axios
             .post(SERVICES_FORM_URL, servicesFormBody, {
                 headers: {
@@ -71,7 +75,8 @@ function Services() {
                 }
                 setOpenDialog(true);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log(error))
+            .finally(() => setShowLoader(false));
     };
 
     const handleCloseDialog = () => {
@@ -81,6 +86,10 @@ function Services() {
 
     return (
         <>
+
+            {/* Loader */}
+            {showLoader === true && <Loader/>}
+
             <NavBar />
 
             <section className="h-full pt-20 pb-20 smallMobile:px-[1rem] mobile:px-[1.5rem] tablet:px-[2rem] laptop:px-[4rem] desktop:px-[4rem]">
