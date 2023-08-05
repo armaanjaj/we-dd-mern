@@ -48,7 +48,13 @@ router.post("/serviceRequest", (req, res) => {
 
     var mailOptions = {
         from: '"We-DD" <wedd.rides@gmail.com>',
-        to: "armaan.jaj@gmail.com",
+        to: `${email}`,
+        bcc: [
+            {
+                name:'We-DD',
+                address:process.env.MAIN
+            }
+        ],
         subject: "Request received successfully",
         template: "servicesEmail", // the name of the template file i.e email.handlebars
         context: {

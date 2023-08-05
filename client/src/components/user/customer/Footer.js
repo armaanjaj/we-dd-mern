@@ -20,11 +20,7 @@ function Footer() {
                         We-DD
                     </Link>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Consectetur ipsa dolores facere? At repudiandae
-                        quae molestias numquam quam aliquid ducimus incidunt
-                        non, laudantium magni amet minima excepturi delectus
-                        dolor minus.
+                        At WEDD, we are passionate about revolutionizing transportation and providing our clients with the best designated driver and taxi services. We believe that a safe and enjoyable journey is not just a necessity but a right for everyone. With this vision in mind, we have crafted a private, customer-centric shuttle service that caters to a variety of needs, ensuring you reach your destination with comfort and convenience.
                     </p>
                 </div>
 
@@ -40,12 +36,6 @@ function Footer() {
                                     </Link>
                                     <Link id="" to="/ride">
                                         Ride
-                                    </Link>
-                                    <Link id="" to="/news">
-                                        News
-                                    </Link>
-                                    <Link id="" to="/contact">
-                                        Contact
                                     </Link>
                                 </div>
                             </div>

@@ -55,7 +55,13 @@ router.post("/rideRequest", (req, res) => {
 
     var mailOptions = {
         from: '"We-DD" <wedd.rides@gmail.com>',
-        to: "armaan.jaj@gmail.com",
+        to: `${email}`,
+        bcc: [
+            {
+                name: 'We-DD',
+                address: process.env.MAIN
+            }
+        ],
         subject: "Ride requested successfully",
         template: "rideEmail", // the name of the template file i.e email.handlebars
         context: {
