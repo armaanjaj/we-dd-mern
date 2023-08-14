@@ -3,28 +3,45 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const cookieParser = require("cookie-parser");
-const passport = require("passport");
 const session = require("express-session");
+const path = require("path");
+
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 // SET-UP COOKIE SETTINGS
 const oneDay = 1000 * 60 * 60 * 24;
 let sess = {
-	secret: "Thisisasecret",
-	resave: false,
-	saveUninitialized: true,
-	cookie: {secure: false, maxAge: oneDay},
+    secret: "Thisisasecret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: oneDay },
+};
+
+var transporter = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    auth: {
+        user: process.env.USER,
+        pass: process.env.PASSWORD,
+    },
+});
+
+var mailOptions = {
+    from: '"We-DD" <wedd.rides@gmail.com>',
+    to: `${process.env.MAIN}`,
+    subject: "Server running issue",
+    html: "<p>There was a problem running your server. Please check your configurations.</p>",
 };
 
 // SET UP MIDDLEWARE
 app.use(session(sess));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // SET-UP HOST SERVER PORT
-const port = process.env.port || 3360;
+const port = process.env.PORT || 3001;
 
 // IMPORT ROUTE MODULE -----------------------------------------------
 const servicesRoute = require("./routes/Services");
@@ -36,13 +53,28 @@ app.use("/api/ride", rideRoute);
 app.use("/api/services", servicesRoute);
 app.use("/api/contact", contactRoute);
 
-// handling status errors
+// LET NODE SERVE THE FILES FOR BUILT REACT APP
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+// SEND FILES FROM BUILD THE ANY ROUTE
+app.get('/*', function (req, res) {
+    res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+});
+
+// HANDLE IF FILE ON THE ROUTE CANNOT BE LOCATED
 app.use((req, res) => {
-	res.status(404).send("Route not found.");
+    res.status(404).send("Route not found.");
 });
 
 // app port listener
 app.listen(port, (err) => {
-	if (err) return console.log(err);
-	console.log(`Server up running at 'http://localhost:${port}/'`);
+    if (err) {
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {} else {
+                console.log("We have contacted the company.")
+            }
+        });
+    } else {
+		console.log(`Server listening on ${port}`)
+	}
 });

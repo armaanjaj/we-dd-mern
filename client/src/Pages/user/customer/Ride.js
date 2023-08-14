@@ -20,7 +20,7 @@ export default function Ride() {
     const [dialogTitle, setDialogTitle] = useState("");
     const [dialogContent, setDialogContent] = useState("");
     const [showLoader, setShowLoader] = useState(false);
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     useEffect(()=>{
         document.title = "We-DD | Request your ride"
@@ -28,7 +28,7 @@ export default function Ride() {
         if(searchParams.get("redirect")==="quickform"){
             window.alert("Please fill out other necessary fields too.")
         }
-    }, []);
+    }, [searchParams]);
 
     // Monitors state of input
     const [fName, setFName] = useState("");
