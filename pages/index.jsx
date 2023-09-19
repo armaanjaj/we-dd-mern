@@ -1,8 +1,8 @@
-import NavBar from "@/components/user/customer/NavBar";
-import Footer from "@/components/user/customer/Footer";
+import NavBar from "@/components/application/NavBar";
+import Footer from "@/components/application/Footer";
 import Card from "@/components/layouts/cards/LinkCard";
 import Form from "@/components/layouts/form/Form";
-import Loader from "@/components/app/Loaders/Loader-FS";
+import Loader from "@/helpers/Loader-FS";
 
 import React from "react";
 import axios from "axios";
@@ -110,7 +110,8 @@ export default function Index() {
     };
 
     return (
-        <>
+        <main>
+            
             <NavBar />
             <section
                 id="homepage"
@@ -191,7 +192,7 @@ export default function Index() {
                         <div className="bg-white p-4 text-center border-[2px] border-solid rounded-[5px]">
                             <div className="text-4xl text-blue-600 mb-2">3</div>
                             <p className="font-semibold">
-                                Hope in and enjoy the ride!
+                                Hop in and enjoy the ride!
                             </p>
                         </div>
                     </div>
@@ -330,6 +331,6 @@ export default function Index() {
                     </MuiButton>
                 </DialogActions>
             </Dialog>
-        </>
+        </main>
     );
 }

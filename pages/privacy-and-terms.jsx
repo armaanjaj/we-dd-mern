@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import NavBar from "@/components/user/customer/NavBar";
-import Footer from "@/components/user/customer/Footer";
+import NavBar from "@/components/application/NavBar";
+import Footer from "@/components/application/Footer";
 
 export default function TermsAndPrivacy() {
     useEffect(() => {

@@ -1,38 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# We-DD: We are Designated Drivers
+
+## Introduction
+
+Welcome to the **We-DD** repository! We-DD is a designated drivers and taxi service company webapp developed using the Next.js. The website provides a platform for users to book designated drivers and taxis for safe and reliable transportation.
+
+## Features
+
+- Booking designated drivers or other services.
+- Email confirmation for bookings.
+- Responsive and user-friendly interface.
+
+## Technologies Used
+
+### Frontend
+
+- `@emotion/react`, `@emotion/styled`: For styling components with Emotion.
+- `@mui/icons-material`, `@mui/material`: Material-UI icons and components for a polished UI.
+- `axios`: Promise-based HTTP client for making API requests.
+- `react`, `react-dom`: Core React libraries.
+- `styled-components`: For styling components using tagged template literals.
+- `universal-cookie`: Universal cookie library to manage cookies across different environments.
+- `body-parser`: Middleware for parsing incoming request bodies.
+- `dotenv`: To load environment variables from a `.env` file.
+- `nodemailer`: Node.js library for sending emails.
+- `nodemailer-express-handlebars`: Nodemailer plugin for using Handlebars templates.
 
 ## Getting Started
 
-First, run the development server:
+1. Clone this repository to your local machine.
+2. Install Node.js and npm (Node Package Manager) if not already installed.
+3. Run `npm install` in the root directory to install the required dependencies for the frontend and backend.
+4. Set up environment variables by creating a `.env.local` file based on the provided `.env.example` file in the root directory. Make sure to fill in the required values.
+5. Run the Next.js application using `npm run dev` in the root directory.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Contributing
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+We welcome contributions to improve the We-DD website. If you find any bugs or have ideas for new features, feel free to open an issue or submit a pull request.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Contact
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+If you have any questions or inquiries, please contact us at [weddservice@gmail.com](mailto:weddservice@gmail.com).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Thank you for using We-DD! We hope you enjoy the ride!

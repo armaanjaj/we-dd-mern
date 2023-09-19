@@ -1,7 +1,7 @@
-import NavBar from "@/components/user/customer/NavBar";
-import Footer from "@/components/user/customer/Footer";
+import NavBar from "@/components/application/NavBar";
+import Footer from "@/components/application/Footer";
 import Button from "@/components/layouts/button/Button";
-import Loader from "@/components/app/Loaders/Loader-FS";
+import Loader from "@/helpers/Loader-FS";
 
 import React from "react";
 import axios from "axios";
