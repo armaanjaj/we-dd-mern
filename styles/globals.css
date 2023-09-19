@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* From google fonts API (latin) */
+@font-face {
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/raleway/v29/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2)
+        format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+        U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
+        U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+    /* font-family: "Montserrat Alternates", sans-serif; */
+    font-family: "Raleway", sans-serif;
+    overflow-x: hidden;
+}
+
+.scrollbar-container {
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 #d1d5db;
+}
+
+.scrollbar-container::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+.scrollbar-container::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 10px;
+}
+
+.scrollbar-container::-webkit-scrollbar-track {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+.scrollbar-container::-moz-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.scrollbar-container::-moz-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 10px;
+}
+
+.scrollbar-container::-moz-scrollbar-track {
+    background: #d1d5db;
+    border-radius: 10px;
+}
