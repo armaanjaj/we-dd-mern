@@ -46,9 +46,7 @@ export default function services(req, res) {
             postalCode == "" ||
             postalCode == undefined ||
             serviceType == "" ||
-            serviceType == undefined ||
-            questionsComments == "" ||
-            questionsComments == undefined
+            serviceType == undefined
         ) {
             res.status(400).send({
                 success: false,
