@@ -98,7 +98,7 @@ export default function Index() {
                 setContactUser({
                     yourName: "",
                     yourEmail: "",
-                    yourMessage: "",
+                    yourMessage: ""
                 });
                 setLoading(false);
             });
